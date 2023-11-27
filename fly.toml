@@ -1,0 +1,23 @@
+# fly.toml
+
+app = "fly-react-test"
+
+[build]
+  dockerfile = "Dockerfile"
+  command = "npm run build"
+
+[[services]]
+  internal_port = 3000
+  protocol = "tcp"
+
+  [services.concurrency]
+    hard_limit = 25
+    soft_limit = 20
+
+  [[services.ports]]
+    handlers = ["http"]
+    port = 80
+
+  [[services.routes]]
+    handle = "Path('/')" 
+    to = "app"
