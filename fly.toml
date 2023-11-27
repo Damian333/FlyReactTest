@@ -1,23 +1,19 @@
-# fly.toml
+# fly.toml app configuration file generated for fly-react-test-withered-morning-9272 on 2023-11-27T19:15:00+01:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
 
-app = "fly-react-test"
+app = "fly-react-test-withered-morning-9272"
+primary_region = "waw"
 
 [build]
   dockerfile = "Dockerfile"
   command = "npm run build"
-
-[[services]]
+  
+[http_service]
   internal_port = 3000
-  protocol = "tcp"
-
-  [services.concurrency]
-    hard_limit = 25
-    soft_limit = 20
-
-  [[services.ports]]
-    handlers = ["http"]
-    port = 80
-
-  [[services.routes]]
-    handle = "Path('/')" 
-    to = "app"
+  force_https = true
+  auto_stop_machines = true
+  auto_start_machines = true
+  min_machines_running = 0
+  processes = ["app"]

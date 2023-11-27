@@ -10,6 +10,8 @@ COPY .npmrc .
 
 COPY package*.json ./
 
+RUN export NPM_TOKEN=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
+
 # Install app dependencies
 RUN npm install --legacy-peer-deps
 
